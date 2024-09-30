@@ -43,9 +43,9 @@ abstract class AppStyle {
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle styleBold18 = TextStyle(
+  static const TextStyle styleBold22 = TextStyle(
     color: Color(0xff211772),
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: FontWeight.w700,
   );
 
@@ -53,5 +53,6 @@ abstract class AppStyle {
     color: Color(0xff211772),
     fontSize: 72,
     fontWeight: FontWeight.w700,
+    height: 1,
   );
 }
