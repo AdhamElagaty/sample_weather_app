@@ -65,12 +65,14 @@ class WeatherCubit extends Cubit<WeatherState> {
       });
       return;
     }
-
+    if (state is! NoLocationPermisionOpend &&
+        state is! NoLocationPermisionallowed) {
+      emit(WeatherLoading());
+    }
     Position? position = await _determinePosition();
     if (position != null) {
-      if (state is WeatherLoadingFailure) {
-        emit(WeatherLoading());
-      } else {
+      if (state is NoLocationPermisionOpend ||
+          state is NoLocationPermisionallowed) {
         emit(NoLocationPermisionLoadingWeatherAndLocationDetails());
       }
       try {
@@ -97,7 +99,7 @@ class WeatherCubit extends Cubit<WeatherState> {
         emit(WeatherLoadingSuccsses());
       } catch (e) {
         emit(WeatherLoadingFailure(
-            errorMessage: "Loading Message Error!\n Try Later😊"));
+            errorMessage: "Loading Weather Error!\n Try Later😊"));
       }
     }
   }
@@ -135,7 +137,7 @@ class WeatherCubit extends Cubit<WeatherState> {
         emit(WeatherLoadingSuccsses());
       } catch (e) {
         emit(WeatherLoadingFailure(
-            errorMessage: "Loading Message Error!\n Try Later😊"));
+            errorMessage: "Loading Weather Error!\n Try Later😊"));
       }
     }
   }
