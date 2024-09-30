@@ -27,13 +27,16 @@ class CustomSliverAppBar extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: SimpleShadow(
-                    opacity: 0.45,
-                    offset: const Offset(6, 8),
-                    sigma: 10,
-                    child: SvgPicture.asset(
-                      weather.current.condition.imagePath,
-                      height: double.infinity,
+                  child: Hero(
+                    tag: "HeroAnimation",
+                    child: SimpleShadow(
+                      opacity: 0.45,
+                      offset: const Offset(6, 8),
+                      sigma: 10,
+                      child: SvgPicture.asset(
+                        weather.current.condition.imagePath,
+                        height: double.infinity,
+                      ),
                     ),
                   ),
                 ),

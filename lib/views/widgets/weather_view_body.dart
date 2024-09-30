@@ -14,52 +14,52 @@ class WeatherViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            BlocProvider.of<WeatherCubit>(context)
-                .weatherResponse!
-                .current
-                .condition
-                .color[300]!,
-            BlocProvider.of<WeatherCubit>(context)
-                .weatherResponse!
-                .current
-                .condition
-                .color[200]!,
-            BlocProvider.of<WeatherCubit>(context)
-                .weatherResponse!
-                .current
-                .condition
-                .color[50]!,
-          ],
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-        ),
-      ),
-      child: LiquidPullToRefresh(
-        animSpeedFactor: 2,
-        height: 180,
-        color: const Color(0xff211772).withOpacity(0.9),
-        onRefresh: () async {
-          await BlocProvider.of<WeatherCubit>(context).getWeather();
-        },
-        backgroundColor: const Color.fromARGB(96, 144, 145, 198),
-        showChildOpacityTransition: true,
-        child: BlocBuilder<WeatherCubit, WeatherState>(
-          builder: (context, state) {
-            WeatherResponseModel weather =
-                BlocProvider.of<WeatherCubit>(context).weatherResponse!;
-            return CustomScrollView(
+    return BlocBuilder<WeatherCubit, WeatherState>(
+      builder: (context, state) {
+        WeatherResponseModel weather =
+            BlocProvider.of<WeatherCubit>(context).weatherResponse!;
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                BlocProvider.of<WeatherCubit>(context)
+                    .weatherResponse!
+                    .current
+                    .condition
+                    .color[300]!,
+                BlocProvider.of<WeatherCubit>(context)
+                    .weatherResponse!
+                    .current
+                    .condition
+                    .color[200]!,
+                BlocProvider.of<WeatherCubit>(context)
+                    .weatherResponse!
+                    .current
+                    .condition
+                    .color[50]!,
+              ],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+          child: LiquidPullToRefresh(
+            animSpeedFactor: 2,
+            height: 180,
+            color: const Color(0xff211772).withOpacity(0.9),
+            onRefresh: () async {
+              await BlocProvider.of<WeatherCubit>(context).getWeather();
+            },
+            backgroundColor: const Color.fromARGB(96, 144, 145, 198),
+            showChildOpacityTransition: true,
+            child: CustomScrollView(
               slivers: [
                 CustomSliverAppBar(weather: weather),
                 WeatherSliverList(weather: weather),
               ],
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
