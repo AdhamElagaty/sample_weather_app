@@ -54,6 +54,10 @@ class Assets {
   static const String imagesLocationWeather =
       "assets/images/location_weather.svg";
 
+  /// Assets for EarthWeather
+  /// assets/images/earth_weather.svg
+  static const String imagesEarthWeather = "assets/images/earth_weather.svg";
+
   static const Map<String, String> _weatherStatusMap = {
     "Sunny": imagesSunny,
     "Clear": imagesClear,
