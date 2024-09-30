@@ -5,4 +5,7 @@ abstract class ILocationService {
     required String lon,
     required String lat,
   });
+
+  Future<List<LocationModel>> geLocationsBySearch(
+      {required String search, LocationModel? nearLocation});
 }
