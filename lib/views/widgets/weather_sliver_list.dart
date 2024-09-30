@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_weather_app/models/weather_response_model.dart';
-import 'package:sample_weather_app/views/widgets/weather_extra_information';
+import 'package:sample_weather_app/views/widgets/weather_extra_information_widget.dart';
 
 class WeatherSliverList extends StatelessWidget {
   const WeatherSliverList({
@@ -23,7 +23,7 @@ class WeatherSliverList extends StatelessWidget {
                 topRight: Radius.circular(42),
               ),
             ),
-            child: WeatherExtraInformation(weather: weather),
+            child: WeatherExtraInformationWidget(weather: weather),
           ),
         ],
       ),
