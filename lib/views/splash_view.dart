@@ -37,7 +37,7 @@ class _SplashViewState extends State<SplashView> {
       context,
       PageRouteBuilder(
         pageBuilder: (_, __, ___) => const HomeView(),
-        transitionDuration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 1200),
         transitionsBuilder: (_, a, __, c) =>
             FadeTransition(opacity: a, child: c),
       ),
@@ -65,8 +65,7 @@ class _SplashViewState extends State<SplashView> {
             ),
             BlocBuilder<WeatherCubit, WeatherState>(
               builder: (context, state) {
-                return state
-                        is NoLocationPermisionLoadingWeatherAndLocationDetails
+                return state is WeatherLoading
                     ? const SpinKitFadingCube(
                         color: Colors.white,
                         size: 25.0,

@@ -13,4 +13,14 @@ class LocationController {
       throw Exception("Failed to retrieve location: ${e.toString()}");
     }
   }
+
+  Future<List<LocationModel>> getLocations(String search,
+      {LocationModel? nearLocation}) async {
+    try {
+      return await locationService.geLocationsBySearch(
+          search: search, nearLocation: nearLocation);
+    } catch (e) {
+      throw Exception("Failed to retrieve location: ${e.toString()}");
+    }
+  }
 }

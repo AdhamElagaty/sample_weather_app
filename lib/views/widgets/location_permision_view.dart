@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sample_weather_app/utils/app_images.dart';
 import 'package:sample_weather_app/utils/app_style.dart';
+import 'package:sample_weather_app/views/cubits/location_cubit/location_cubit.dart';
 import 'package:sample_weather_app/views/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sample_weather_app/views/cubits/weather_cubit/weather_state.dart';
+import 'package:sample_weather_app/views/search_view.dart';
 import 'package:sample_weather_app/views/widgets/custom_elevated_button_widget.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -49,12 +53,24 @@ class LocationPermisionViewWidget extends StatelessWidget {
                 height: 22,
               ),
               CustomElevatedButtonWidget(
-                onPressed: () {
-                  BlocProvider.of<WeatherCubit>(context).state
-                          is NoLocationPermisionLoadingWeatherAndLocationDetails
-                      ? () {}
-                      : () {};
-                },
+                onPressed: BlocProvider.of<WeatherCubit>(context).state
+                        is NoLocationPermisionLoadingWeatherAndLocationDetails
+                    ? () {
+                        log(BlocProvider.of<WeatherCubit>(context)
+                            .state
+                            .toString());
+                      }
+                    : () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => LocationCubit(),
+                              child: const SearchView(),
+                            ),
+                          ),
+                        );
+                      },
                 backgroundColor: const Color(0xffFFD600),
                 child: const Text(
                   "Search by Name 🔍",

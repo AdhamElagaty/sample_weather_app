@@ -28,4 +28,28 @@ class LocationService implements ILocationService {
       throw Exception("oops there was an error, try later!");
     }
   }
+
+  @override
+  Future<List<LocationModel>> geLocationsBySearch(
+      {required String search, LocationModel? nearLocation}) async {
+    try {
+      String nearPosition = nearLocation == null
+          ? ""
+          : "&lat=${nearLocation.latitude}&lon=${nearLocation.longitude}";
+      var response = await dio
+          .get("$baseURL/api/?q=$search&limit=15&lang=en$nearPosition");
+      List<LocationModel> locations = [];
+      for (var location in response.data['features']) {
+        locations.add(LocationModel.fromJsonLocation(location));
+      }
+      return locations;
+    } on DioException catch (e) {
+      final String errMessage = e.response?.data["error"]["message"] ??
+          "oops there was an error, try later!";
+      throw Exception(errMessage);
+    } catch (e) {
+      log(e.toString());
+      throw Exception("oops there was an error, try later!");
+    }
+  }
 }
